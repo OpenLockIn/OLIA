@@ -1,0 +1,1 @@
+Zipped gerber files for OLIA and the optical DC servo board. The .brd and .sch (Autodesk EAGLE format) source files used to generate these are included in the [SourceFiles](https://github.com/ajharvie/OLIA/tree/main/Boards/SourceFiles) directory.
