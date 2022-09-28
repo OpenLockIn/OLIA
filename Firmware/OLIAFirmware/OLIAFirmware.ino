@@ -1,3 +1,5 @@
+//NOTE: Select clock speed of 816 MHz for correct operation
+
 #include <IntervalTimer.h>
 #include <math.h>
 #include <ADC.h>
@@ -7,7 +9,7 @@
 #define inMultiplier 64 //ratio of PLL frequency to external reference frequency
 #define nHarmonics 3 //number of higher harmonics to calculate (at least 1, max 3). Can be increased if digitisation rate is decreased accordingly
 
-//NOTE: Select clock speed of 816 MHz for correct operation
+
 
 /////////////////////////////////////DEFAULTS///////////////////////////////////////                                   
 
@@ -31,7 +33,7 @@ double outputScale = 10; //scale factor for "analogue" output
 
 double outputScaleCalibration = 0.3149; //calibration factor for output scale (determined experimentally)
 
-double calibrationFactor = 3.3/2.047;
+double calibrationFactor = 3.3/2.047; //convert to units of V
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -100,6 +102,8 @@ volatile double xqMean2[100];
 double grabQuad[100];
 double grabPhas[100];
 double grabVar;
+double grabVari;
+double grabVarq;
 double lag;
 double rmsMeasured;
 double noise;
@@ -272,12 +276,15 @@ void loop() {
     grabQuad[i] = xqFilt2[i]*calibrationFactor;
   }
   
-  grabVar = xqVar2[0];
+  grabVarq = xqVar2[0];
+  grabVari = xiVar2[0];
   interrupts(); //back on again
 
   //calculate phase and R
   lag = atan(grabQuad[0]/grabPhas[0]);
   rmsMeasured = sqrt(grabQuad[0]*grabQuad[0] + grabPhas[0]*grabPhas[0]);
+
+  grabVar = sqrt(xqVar2[0]*xqVar2[0] + xiVar2[0]*xiVar2[0]);
   noise = sqrt(grabVar)*calibrationFactor;
 
   //heuristic value to determine whether clipping is happening
@@ -463,6 +470,12 @@ void calculate(){ //function for actually doing the lock-in
       incr = alpha*delta;
       xqMean2[0] = xqMean2[0] + incr;
       xqVar2[0] = alpha_min*(xqVar2[0] + delta*incr);
+
+      //and with in-phase harmonic
+      delta = xiFilt2[0] - xiMean2[0];
+      incr = alpha*delta;
+      xiMean2[0] = xiMean2[0] + incr;
+      xiVar2[0] = alpha_min*(xiVar2[0] + delta*incr);
       
       ++sampleIndex;
     }
