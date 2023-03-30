@@ -17,7 +17,7 @@ A pocket-sized, USB-powered, open digital lock-in amplifier, based around the Te
 - Ultra low unit cost (~£30)
 - Simple construction (all hand-solderable)
 
-An **arxiv preprint** describing the device's design, construction, features and use, alongside test data is available here: <https://doi.org/10.48550/arXiv.2211.08889>. 
+A paper describing the device's design, construction, features and use, alongside test data is available here: <https://doi.org/10.3389/fsens.2023.1102176>.  
 
 This repository includes a [parts list and build guide](https://github.com/ajharvie/OLIA/blob/main/doc/buildguide.md) alongside some simple [usage instructions.](https://github.com/ajharvie/OLIA/blob/main/doc/usageGuide.md) CAD and CAM files for the device's PCB are available in the [boards](https://github.com/ajharvie/OLIA/tree/main/Boards) directory, and source code for the device's firmware is available [here](https://github.com/ajharvie/OLIA/tree/main/Firmware). A simple python frontend is provided [here](https://github.com/ajharvie/OLIA/tree/main/GUI), but those who wish to build their own interface can refer to the [serial reference](https://github.com/ajharvie/OLIA/blob/main/doc/SerialRef.md).
 
