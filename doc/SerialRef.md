@@ -35,7 +35,7 @@ OLIA makes an output every 100 ms, consisting of a string of values separated by
 | 9 | Undersampling | Integer | Degree of undersampling (for high frequency external reference signals only) e.g. if 1, there is no undersampling (64 samples per period) but if 2, this reduces to 32 samples per period |
 | 10 | *R* | Float | Total recovered lock-in amplitude |
 | 11 | *ϕ* | Float | Recovered phase in radians |
-| 12 | Noise estimate | Float | Noise estimate based on the variance of the quadrature signal |
+| 12 | Noise estimate | Float | Noise estimate based on the variance of the X and Y signals |
 | 13 | *X*(1) | Float | Recovered lock-in amplitude (In phase, fundamental) |
 | 14 | *Y*(1) | Float | Recovered lock-in amplitude (quadrature, fundamental) |
 | 15 | *X*(n) | Float | Recovered lock-in amplitude (In phase, nth harmonic). Here, n is the harmonic number of the first higher harmonic being calculated (default 2, reported later) |
